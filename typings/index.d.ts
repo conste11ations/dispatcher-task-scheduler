@@ -48,8 +48,8 @@ export type NavigateAction = 'PREV' | 'NEXT' | 'TODAY' | 'DATE';
 export interface Event {
     allDay?: boolean;
     title?: string;
-    start?: Date;
-    end?: Date;
+    start: Date;
+    end: Date;
     resource?: any;
 }
 export interface DateRange {

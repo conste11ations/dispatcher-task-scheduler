@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import { state}  from "./constants/events"
+import { defaultEventsState } from "./constants/events";
 
 import "./App.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -9,17 +9,38 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 const localizer = momentLocalizer(moment);
 
 function App() {
-    return (
-      <div className="App">
-        <Calendar
-          localizer={localizer}
-          defaultDate={new Date()}
-          defaultView="month"
-          events={state.events}
-          style={{ height: "100vh" }}
-        />
-      </div>
-    );
+  const [events, setEvents] = useState(defaultEventsState);
+
+  const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
+    const title = window.prompt('New Event name')
+    if (title)
+      setEvents({
+        events: [
+          ...events.events,
+          {
+            start,
+            end,
+            title,
+          },
+        ],
+      });
+    console.log(start, end, title)
+  }
+
+  return (
+    <div className="App">
+      <Calendar
+        selectable
+        localizer={localizer}
+        defaultDate={new Date()}
+        defaultView={"week"}
+        events={events.events}
+        onSelectEvent={event => alert(event.title)}
+        onSelectSlot={handleSelect}
+        style={{ height: "100vh" }}
+      />
+    </div>
+  );
 }
 
 export default App;

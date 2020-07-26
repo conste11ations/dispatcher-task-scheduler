@@ -6,6 +6,10 @@
       "dom.iterable",
       "esnext"
     ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./typings"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,7 +23,11 @@
     "noEmit": true,
     "jsx": "react"
   },
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
-    "src"
+    "src", 
+    "typings/index.d.ts",
   ]
 }

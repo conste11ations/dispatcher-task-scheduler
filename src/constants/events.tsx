@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const state = {
+export const defaultEventsState = {
   events: [
     {
       start: moment().toDate(),
