@@ -366,5 +366,3 @@ export interface Views {
     AGENDA: 'agenda';
 }
 export function move(View: ViewStatic | ViewKey, options: MoveOptions): Date;
-
-declare module "date-arithmetic";
