@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { defaultEventsState } from "./constants/events";
+import Task from "./components/index"
 import "./App.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
@@ -28,6 +29,7 @@ function App() {
 
   return (
       <div className="App">
+        <Task></Task>
         <Calendar
           selectable
           localizer={localizer}
