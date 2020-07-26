@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { defaultEventsState } from "./constants/events";
-
 import "./App.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
@@ -28,18 +27,18 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Calendar
-        selectable
-        localizer={localizer}
-        defaultDate={new Date()}
-        defaultView={"week"}
-        events={events.events}
-        onSelectEvent={event => alert(event.title)}
-        onSelectSlot={handleSelect}
-        style={{ height: "90vh", width: "90vw", margin: "20px" }}
-      />
-    </div>
+      <div className="App">
+        <Calendar
+          selectable
+          localizer={localizer}
+          defaultDate={new Date()}
+          defaultView={"week"}
+          events={events.events}
+          onSelectEvent={event => alert(event.title)}
+          onSelectSlot={handleSelect}
+          style={{ height: "90vh", width: "90vw", margin: "20px" }}
+        />
+      </div>
   );
 }
 
