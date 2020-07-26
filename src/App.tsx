@@ -37,7 +37,7 @@ function App() {
         events={events.events}
         onSelectEvent={event => alert(event.title)}
         onSelectSlot={handleSelect}
-        style={{ height: "100vh" }}
+        style={{ height: "90vh", width: "90vw", margin: "20px" }}
       />
     </div>
   );
