@@ -7,6 +7,20 @@
   pointer-events: none;
 }
 
+.edit {
+  color: red;
+  border: solid;
+}
+
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

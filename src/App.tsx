@@ -10,6 +10,7 @@ const localizer = momentLocalizer(moment);
 
 function App() {
   const [events, setEvents] = useState(defaultEventsState);
+  const [show, setShow] = useState(false);
 
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
     const title = window.prompt('New Event name')
@@ -29,14 +30,15 @@ function App() {
 
   return (
       <div className="App">
-        <Task></Task>
+        <Task title={events} show={show}></Task>
         <Calendar
           selectable
           localizer={localizer}
           defaultDate={new Date()}
           defaultView={"week"}
           events={events.events}
-          onSelectEvent={event => alert(event.title)}
+          // onSelectEvent={event => alert(event.title)}
+          onSelectEvent={event => setShow(true)}
           onSelectSlot={handleSelect}
           style={{ height: "90vh", width: "90vw", margin: "20px" }}
         />

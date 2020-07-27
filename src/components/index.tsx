@@ -10,10 +10,13 @@ export default function Task(props: any) {
   const CREATE = "CREATE";
 
   const { mode, transition, back } = useVisualMode(CREATE);
+  console.log("Task!", props.title);
 
   return (
     <>
-    {mode === CREATE && <Edit></Edit>}
+    <div>
+    {props.title && <Edit title={props.title} show={props.show}></Edit>}
+    </div>
     </>
   );
 }
