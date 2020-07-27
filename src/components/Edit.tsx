@@ -27,12 +27,12 @@ export interface Event {
 
 const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
-  const initValues = { name: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end }
+  const initValues = { name: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end, resource: activeEvent.resource }
   console.log("nit", initValues);
 
   return (
     <div className={showHideClassName}>
-      <h3>Modifying the following event:</h3>
+      <h2>Modifying the following event:</h2>
       <Formik
         enableReinitialize
         initialValues={initValues}
@@ -62,13 +62,24 @@ const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
               />
             </div>
             <div className="formElems">
-              <label htmlFor="startDate">Start Datetime</label>
+              <label htmlFor="startDate">Start<br/>Datetime</label>
               <Field name="startDate" defaultValue={props.values.startDate} timeFormat={true} component={FormikDateTime} />
             </div>
             <div className="formElems">
               <label htmlFor="endDate">End<br/>Datetime</label>
               <Field name="endDate" defaultValue={props.values.endDate} timeFormat={true} component={FormikDateTime} />
             </div>
+            <div className="formElems">
+              <label htmlFor="resource">Event<br />Resource</label>
+              <input
+                id="resource"
+                type="text"
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                value={props.values.resource}
+                name="resource"
+              />
+              </div>
             {props.errors.name && <div id="feedback">{props.errors.name}</div>}
             <div>
               <button className="button" type="submit">Update</button>
