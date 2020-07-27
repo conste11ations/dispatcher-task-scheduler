@@ -2,7 +2,8 @@
 import React, { useEffect } from 'react';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 import Datetime from "react-datetime";
-import FormikDateTime from "./FormikDateTime"
+import FormikDateTime from "./FormikDateTime";
+
 interface t {
   updateEvent: any,
   activeEvent: Event,
@@ -64,7 +65,7 @@ const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
               <Field name="startDate" defaultValue={props.values.startDate} timeFormat={true} component={FormikDateTime} />
             </div>
             <div className="formElems">
-              <label htmlFor="endDate">End Datetime</label>
+              <label htmlFor="endDate">End<br/>Datetime</label>
               <Field name="endDate" defaultValue={props.values.endDate} timeFormat={true} component={FormikDateTime} />
             </div>
             {props.errors.name && <div id="feedback">{props.errors.name}</div>}
