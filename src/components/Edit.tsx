@@ -28,10 +28,11 @@ export interface Event {
 const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
   const initValues = { name: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end }
+  console.log("nit", initValues);
 
   return (
     <div className={showHideClassName}>
-      <h3>Editing the following event:</h3>
+      <h3>Modifying the following event:</h3>
       <Formik
         enableReinitialize
         initialValues={initValues}
@@ -70,8 +71,9 @@ const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
             </div>
             {props.errors.name && <div id="feedback">{props.errors.name}</div>}
             <div>
-              <button className="button" type="submit">Submit</button>
-              <button className="button" type="button" value="Go back!" onClick={() => onCancel()}>Cancel</button>
+              <button className="button" type="submit">Update</button>
+              <button className="button" type="button" value="back" onClick={() => onCancel()}>Cancel</button>
+              <button className="button" type="button">Delete</button>
             </div>
           </form>
         )}

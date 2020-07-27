@@ -6,12 +6,25 @@ import Task from "./components/index"
 import "./App.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+export interface Event {
+  allDay?: boolean;
+  title: string;
+  start: Date;
+  end: Date;
+  resource?: any;
+}
+
 const localizer = momentLocalizer(moment);
 
 function App() {
   const [events, setEvents] = useState(defaultEventsState);
-  const [activeEvent, setActiveEvent] = useState(defaultEventsState.events[0])
+  const [activeEvent, setActiveEvent] = useState(undefined)
   const [show, setShow] = useState(false);
+
+  const isActiveEvent = (activeEvent: Event, event: Event) => {
+    return activeEvent === event;
+  }
+
 
   const showEditForm = (event: any) => {
     setActiveEvent(event);
@@ -22,8 +35,8 @@ function App() {
     setShow(false);
   }
 
-  const updateEvent = (input: any) => {
-    console.log("input", input)
+  const updateEvent = (activeEvent: Event, event: Event) => {
+    return isActiveEvent(activeEvent, event)
   }
 
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {

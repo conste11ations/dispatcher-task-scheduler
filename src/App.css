@@ -320,3 +320,8 @@ td.rdtYear:hover {
 .rdtTime td {
   cursor: default;
 }
+
+/* react-big-calendar */
+.rbc-time-header .rbc-overflowing {
+  margin-right: 0px;
+}
