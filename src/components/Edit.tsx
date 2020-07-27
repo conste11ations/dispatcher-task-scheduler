@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
+import Datetime from "react-datetime";
 
 interface t {
   activeEvent: any,
@@ -13,10 +14,8 @@ interface Values {
   endDate: string;
 }
 
-
 const Edit = ({ activeEvent, onCancel, show }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
-  console.log("edit: ae is", activeEvent)
   const initValues = { name: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end }
 
   return (
@@ -50,22 +49,20 @@ const Edit = ({ activeEvent, onCancel, show }: t) => {
             </div>
             <div className="formElems">
               <label htmlFor="startDate">Start Datetime</label>
-              <input
-                type="datetime-local"
+              <Datetime
+                defaultValue={props.values.startDate}
                 onChange={props.handleChange}
                 onBlur={props.handleBlur}
                 value={props.values.startDate}
-                name="startDate"
               />
             </div>
             <div className="formElems">
               <label htmlFor="endDate">End Datetime</label>
-              <input
-                type="datetime-local"
+              <Datetime
+                defaultValue={props.values.endDate}
                 onChange={props.handleChange}
                 onBlur={props.handleBlur}
                 value={props.values.endDate}
-                name="endDate"
               />
             </div>
             {props.errors.name && <div id="feedback">{props.errors.name}</div>}

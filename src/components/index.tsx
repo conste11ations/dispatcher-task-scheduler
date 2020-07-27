@@ -10,7 +10,6 @@ export default function Task(props: any) {
   const CREATE = "CREATE";
 
   const { mode, transition, back } = useVisualMode(CREATE);
-  console.log("Task!", props.activeEvent);
 
   return (
     <>
