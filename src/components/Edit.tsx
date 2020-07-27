@@ -17,13 +17,14 @@ interface Values {
 const Edit = ({ activeEvent, onCancel, show }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
   console.log("edit: ae is", activeEvent)
+  const initValues = { name: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end }
 
   return (
     <div className={showHideClassName}>
       <h3>Editing event:</h3>
       <p>{activeEvent.title}</p>
       <Formik
-        initialValues={{ name: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end }}
+        initialValues={initValues}
         onSubmit={(
           values: Values,
           { setSubmitting }: FormikHelpers<Values>
@@ -36,37 +37,47 @@ const Edit = ({ activeEvent, onCancel, show }: t) => {
       >
         {props => (
           <form onSubmit={props.handleSubmit}>
-            <input
-              type="text"
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.name}
-              name="name"
-            />
+            <div className="formElems">
+              <label htmlFor="name">Event<br/>name</label>
               <input
-                type="time"
+                id="name"
+                type="text"
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                value={props.values.name}
+                name="name"
+              />
+            </div>
+            <div className="formElems">
+              <label htmlFor="startDate">Start Datetime</label>
+              <input
+                type="datetime-local"
                 onChange={props.handleChange}
                 onBlur={props.handleBlur}
                 value={props.values.startDate}
                 name="startDate"
               />
+            </div>
+            <div className="formElems">
+            <label htmlFor="endDate">End Datetime</label>
               <input
-                type="time"
+                type="datetime-local"
                 onChange={props.handleChange}
                 onBlur={props.handleBlur}
                 value={props.values.endDate}
                 name="endDate"
               />
-              {props.errors.name && <div id="feedback">{props.errors.name}</div>}
-              <div>
-                <button className="button" type="submit">Submit</button>
-                <button className="button" type="button" value="Go back!" onClick={() => onCancel()}>Cancel</button>
-              </div>
+            </div>
+            {props.errors.name && <div id="feedback">{props.errors.name}</div>}
+            <div>
+              <button className="button" type="submit">Submit</button>
+              <button className="button" type="button" value="Go back!" onClick={() => onCancel()}>Cancel</button>
+            </div>
           </form>
         )}
       </Formik>
     </div>
-        );
+  );
 }
 
 export default Edit;
