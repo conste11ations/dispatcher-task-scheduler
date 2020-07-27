@@ -1,5 +1,7 @@
 .App {
+  justify-content: center;
   text-align: center;
+  margin: 20px;
 }
 
 .App-logo {
@@ -8,10 +10,28 @@
 }
 
 .edit {
-  color: red;
+  color: lightslategray;
   border: solid;
+  border-radius: 25px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
+.button {
+  color: #373a3c;
+  display: inline-block;
+  margin: 10px;
+  margin-left: 5px;
+  text-align: center;
+  vertical-align: middle;
+  background: none;
+  background-image: none;
+  border: 1px solid #ccc;
+  padding: .375rem 1rem;
+  border-radius: 4px;
+  line-height: normal;
+  white-space: nowrap;
+}
 
 .display-block {
   display: block;

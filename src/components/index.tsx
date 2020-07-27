@@ -10,12 +10,12 @@ export default function Task(props: any) {
   const CREATE = "CREATE";
 
   const { mode, transition, back } = useVisualMode(CREATE);
-  console.log("Task!", props.title);
+  console.log("Task!", props.activeEvent);
 
   return (
     <>
     <div>
-    {props.title && <Edit title={props.title} show={props.show} onCancel={props.onCancel}></Edit>}
+    {props.activeEvent && <Edit activeEvent={props.activeEvent} show={props.show} onCancel={props.onCancel}></Edit>}
     </div>
     </>
   );

@@ -10,9 +10,11 @@ const localizer = momentLocalizer(moment);
 
 function App() {
   const [events, setEvents] = useState(defaultEventsState);
+  const [activeEvent, setActiveEvent] = useState(defaultEventsState.events[0])
   const [show, setShow] = useState(false);
 
-  const showEditForm = () => {
+  const showEditForm = (event: any) => {
+    setActiveEvent(event);
     setShow(true);
   }
 
@@ -38,7 +40,7 @@ function App() {
 
   return (
     <div className="App">
-      <Task title={events}
+      <Task activeEvent={activeEvent}
         show={show}
         onCancel={hideEditForm}>
       </Task>
@@ -48,9 +50,9 @@ function App() {
         defaultDate={new Date()}
         defaultView={"week"}
         events={events.events}
-        onSelectEvent={event => showEditForm()}
+        onSelectEvent={event => showEditForm(event)}
         onSelectSlot={handleSelect}
-        style={{ height: "90vh", width: "90vw", margin: "20px" }}
+        style={{ margin: "auto", height: "90vh", width: "90vw" }}
       />
     </div>
   );
