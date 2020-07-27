@@ -22,6 +22,10 @@ function App() {
     setShow(false);
   }
 
+  const updateEvent = (input: any) => {
+    console.log("input", input)
+  }
+
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
     const title = window.prompt('New Event name')
     if (title)
@@ -41,7 +45,7 @@ function App() {
   return (
     <div className="App">
       <Task
-        setEvents={setEvents}
+        updateEvent={updateEvent}
         activeEvent={activeEvent}
         show={show}
         onCancel={hideEditForm}>

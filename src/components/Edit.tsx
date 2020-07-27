@@ -2,9 +2,9 @@
 import React, { useEffect } from 'react';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 import Datetime from "react-datetime";
-
+import FormikDateTime from "./FormikDateTime"
 interface t {
-  setEvents: Event[],
+  updateEvent: any,
   activeEvent: Event,
   onCancel: any,
   show: boolean,
@@ -24,7 +24,7 @@ export interface Event {
   resource?: any;
 }
 
-const Edit = ({ activeEvent, onCancel, show }: t) => {
+const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
   const initValues = { name: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end }
 
@@ -34,16 +34,17 @@ const Edit = ({ activeEvent, onCancel, show }: t) => {
       <Formik
         enableReinitialize
         initialValues={initValues}
-        onSubmit={(
-          values: Values,
-          { setSubmitting }: FormikHelpers<Values>
-        ) => {
-          
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
-        }}
+        onSubmit={(values: Values) => console.log("values", values)}
+      // onSubmit={(
+      //   values: Values,
+      //   { setSubmitting }: FormikHelpers<Values>
+      // ) => {
+      //   //updateEvent(values);
+      //   setTimeout(() => {
+      //     alert(JSON.stringify(values, null, 2));
+      //     setSubmitting(false);
+      //   }, 500);
+      // }}
       >
         {props => (
           <form onSubmit={props.handleSubmit}>
@@ -60,21 +61,11 @@ const Edit = ({ activeEvent, onCancel, show }: t) => {
             </div>
             <div className="formElems">
               <label htmlFor="startDate">Start Datetime</label>
-              <Datetime
-                defaultValue={props.values.startDate}
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.startDate}
-              />
+              <Field name="startDate" defaultValue={props.values.startDate} timeFormat={true} component={FormikDateTime} />
             </div>
             <div className="formElems">
               <label htmlFor="endDate">End Datetime</label>
-              <Datetime
-                defaultValue={props.values.endDate}
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.endDate}
-              />
+              <Field name="endDate" defaultValue={props.values.endDate} timeFormat={true} component={FormikDateTime} />
             </div>
             {props.errors.name && <div id="feedback">{props.errors.name}</div>}
             <div>
