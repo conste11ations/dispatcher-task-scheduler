@@ -7,8 +7,8 @@
       "esnext"
     ],
     "typeRoots": [
+      "./typings",
       "./node_modules/@types",
-      "./typings"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -28,6 +28,6 @@
   ],
   "include": [
     "src", 
-    "typings/index.d.ts",
+    "typings",
   ]
 }

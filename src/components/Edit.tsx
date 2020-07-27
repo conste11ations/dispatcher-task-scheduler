@@ -1,17 +1,27 @@
+///<reference path="../../typings/index.d.ts"/>
 import React, { useEffect } from 'react';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 import Datetime from "react-datetime";
 
 interface t {
-  activeEvent: any,
+  setEvents: Event[],
+  activeEvent: Event,
   onCancel: any,
   show: boolean,
 }
 
 interface Values {
   name: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
+}
+
+export interface Event {
+  allDay?: boolean;
+  title: string;
+  start: Date;
+  end: Date;
+  resource?: any;
 }
 
 const Edit = ({ activeEvent, onCancel, show }: t) => {
@@ -28,6 +38,7 @@ const Edit = ({ activeEvent, onCancel, show }: t) => {
           values: Values,
           { setSubmitting }: FormikHelpers<Values>
         ) => {
+          
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
