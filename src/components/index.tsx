@@ -15,7 +15,7 @@ export default function Task(props: any) {
   return (
     <>
     <div>
-    {props.title && <Edit title={props.title} show={props.show}></Edit>}
+    {props.title && <Edit title={props.title} show={props.show} onCancel={props.onCancel}></Edit>}
     </div>
     </>
   );
