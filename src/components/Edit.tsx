@@ -62,11 +62,11 @@ const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
               />
             </div>
             <div className="formElems">
-              <label htmlFor="startDate">Start<br/>Datetime</label>
+              <label htmlFor="startDate" style={{ marginRight: "-6px" }}>Start<br />Datetime</label>
               <Field name="startDate" defaultValue={props.values.startDate} timeFormat={true} component={FormikDateTime} />
             </div>
             <div className="formElems">
-              <label htmlFor="endDate">End<br/>Datetime</label>
+              <label htmlFor="endDate" style={{ marginRight: "-6px" }}>End<br />Datetime</label>
               <Field name="endDate" defaultValue={props.values.endDate} timeFormat={true} component={FormikDateTime} />
             </div>
             <div className="formElems">
@@ -79,7 +79,7 @@ const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
                 value={props.values.resource}
                 name="resource"
               />
-              </div>
+            </div>
             {props.errors.name && <div id="feedback">{props.errors.name}</div>}
             <div>
               <button className="button" type="submit">Update</button>
