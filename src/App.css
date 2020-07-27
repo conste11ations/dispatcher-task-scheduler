@@ -48,12 +48,17 @@
   text-align: center;
   vertical-align: middle;
   background: none;
+  background-color: #ccc;
   background-image: none;
   border: 1px solid #ccc;
   padding: .375rem 1rem;
   border-radius: 4px;
   line-height: normal;
   white-space: nowrap;
+}
+
+.button:hover {
+  box-shadow: 0 0 11px rgba(10, 10, 10, 0.2); 
 }
 
 .display-block {
@@ -66,6 +71,7 @@
 
 .formElems {
   display: flex;
+  margin: 10px;
 }
 
 @media (prefers-reduced-motion: no-preference) {

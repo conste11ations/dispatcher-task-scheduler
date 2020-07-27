@@ -21,9 +21,9 @@ const Edit = ({ activeEvent, onCancel, show }: t) => {
 
   return (
     <div className={showHideClassName}>
-      <h3>Editing event:</h3>
-      <p>{activeEvent.title}</p>
+      <h3>Editing the following event:</h3>
       <Formik
+        enableReinitialize
         initialValues={initValues}
         onSubmit={(
           values: Values,
@@ -38,7 +38,7 @@ const Edit = ({ activeEvent, onCancel, show }: t) => {
         {props => (
           <form onSubmit={props.handleSubmit}>
             <div className="formElems">
-              <label htmlFor="name">Event<br/>name</label>
+              <label htmlFor="name">Event<br />name</label>
               <input
                 id="name"
                 type="text"
@@ -59,7 +59,7 @@ const Edit = ({ activeEvent, onCancel, show }: t) => {
               />
             </div>
             <div className="formElems">
-            <label htmlFor="endDate">End Datetime</label>
+              <label htmlFor="endDate">End Datetime</label>
               <input
                 type="datetime-local"
                 onChange={props.handleChange}
