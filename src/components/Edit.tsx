@@ -1,7 +1,6 @@
 ///<reference path="../../typings/index.d.ts"/>
-import React, { useEffect } from 'react';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
-import Datetime from "react-datetime";
+import React from 'react';
+import { Formik, Field } from 'formik';
 import FormikDateTime from "./FormikDateTime";
 
 interface t {
@@ -36,17 +35,7 @@ const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
       <Formik
         enableReinitialize
         initialValues={initValues}
-        onSubmit={(values: Values) => console.log("values", values)}
-      // onSubmit={(
-      //   values: Values,
-      //   { setSubmitting }: FormikHelpers<Values>
-      // ) => {
-      //   //updateEvent(values);
-      //   setTimeout(() => {
-      //     alert(JSON.stringify(values, null, 2));
-      //     setSubmitting(false);
-      //   }, 500);
-      // }}
+        onSubmit={(values: Values) => updateEvent(activeEvent, values)}
       >
         {props => (
           <form onSubmit={props.handleSubmit}>

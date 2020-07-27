@@ -35,8 +35,10 @@ function App() {
     setShow(false);
   }
 
-  const updateEvent = (activeEvent: Event, event: Event) => {
-    return isActiveEvent(activeEvent, event)
+  const updateEvent = (activeEvent: Event, updatedEvent: Event) => {
+    console.log("received updatedEvent", updatedEvent)
+    const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e))
+    setEvents({ events: [...eventCopy, updatedEvent] });
   }
 
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
@@ -49,7 +51,7 @@ function App() {
             start,
             end,
             title,
-          },
+          }
         ],
       });
     console.log(start, end, title)
