@@ -36,24 +36,20 @@ function App() {
   }
 
   const updateEvent = (activeEvent: Event, updatedEvent: Event) => {
-    console.log("received updatedEvent", updatedEvent)
-    const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e))
-    setEvents({ events: [...eventCopy, updatedEvent] });
+
+    const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e));
+    const parsedUpdatedEvent = (e: any) => {
+      return { title: e.title, start: e.startDate, end: e.endDate, resource: e.resource }
+    }
+
+    setEvents({ events: [...eventCopy, parsedUpdatedEvent(updatedEvent)] });
+    hideEditForm();
   }
 
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
     const title = window.prompt('New Event name')
     if (title)
-      setEvents({
-        events: [
-          ...events.events,
-          {
-            start,
-            end,
-            title,
-          }
-        ],
-      });
+      setEvents({ events: [...events.events, { start, end, title }] });
     console.log(start, end, title)
   }
 

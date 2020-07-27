@@ -11,9 +11,10 @@ interface t {
 }
 
 interface Values {
-  name: string;
+  title: string;
   startDate: Date;
   endDate: Date;
+  resource: string;
 }
 
 export interface Event {
@@ -26,8 +27,8 @@ export interface Event {
 
 const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
-  const initValues = { name: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end, resource: activeEvent.resource }
-  console.log("nit", initValues);
+  const initValues = { title: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end, resource: activeEvent.resource }
+  // console.log("nit", initValues);
 
   return (
     <div className={showHideClassName}>
@@ -42,12 +43,12 @@ const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
             <div className="formElems">
               <label htmlFor="name">Event<br />name</label>
               <input
-                id="name"
+                id="title"
                 type="text"
                 onChange={props.handleChange}
                 onBlur={props.handleBlur}
-                value={props.values.name}
-                name="name"
+                value={props.values.title}
+                name="title"
               />
             </div>
             <div className="formElems">
@@ -69,7 +70,7 @@ const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
                 name="resource"
               />
             </div>
-            {props.errors.name && <div id="feedback">{props.errors.name}</div>}
+            {props.errors.title && <div id="feedback">{props.errors.title}</div>}
             <div>
               <button className="button" type="submit">Update</button>
               <button className="button" type="button" value="back" onClick={() => onCancel()}>Cancel</button>
