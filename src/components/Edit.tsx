@@ -5,6 +5,7 @@ import FormikDateTime from "./FormikDateTime";
 
 interface t {
   updateEvent: any,
+  deleteEvent: any,
   activeEvent: Event,
   onCancel: any,
   show: boolean,
@@ -25,7 +26,7 @@ export interface Event {
   resource?: any;
 }
 
-const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
+const Edit = ({ updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
   const initValues = { title: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end, resource: activeEvent.resource }
   // console.log("nit", initValues);
@@ -74,7 +75,7 @@ const Edit = ({ updateEvent, activeEvent, onCancel, show }: t) => {
             <div>
               <button className="button" type="submit">Update</button>
               <button className="button" type="button" value="back" onClick={() => onCancel()}>Cancel</button>
-              <button className="button" type="button">Delete</button>
+              <button className="button" type="button" onClick={() => deleteEvent(activeEvent)}>Delete</button>
             </div>
           </form>
         )}

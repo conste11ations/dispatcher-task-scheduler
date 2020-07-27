@@ -14,7 +14,7 @@ export default function Task(props: any) {
   return (
     <>
     <div>
-    {props.activeEvent && <Edit updateEvent={props.updateEvent} activeEvent={props.activeEvent} show={props.show} onCancel={props.onCancel}></Edit>}
+    {props.activeEvent && <Edit updateEvent={props.updateEvent} deleteEvent={props.deleteEvent} activeEvent={props.activeEvent} show={props.show} onCancel={props.onCancel}></Edit>}
     </div>
     </>
   );

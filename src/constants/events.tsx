@@ -3,8 +3,8 @@ import moment from "moment";
 export const defaultEventsState = {
   events: [
     {
-      start: moment().toDate(),
-      end: moment().add(1, "days").toDate(),
+      start: moment().startOf("day").toDate(),
+      end: moment().endOf("day").toDate(),
       title: "Example event"
     },
     {

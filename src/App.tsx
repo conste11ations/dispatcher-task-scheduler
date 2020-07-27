@@ -29,22 +29,30 @@ function App() {
   const showEditForm = (event: any) => {
     setActiveEvent(event);
     setShow(true);
-  }
+  };
 
   const hideEditForm = () => {
     setShow(false);
-  }
+  };
 
   const updateEvent = (activeEvent: Event, updatedEvent: Event) => {
 
     const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e));
     const parsedUpdatedEvent = (e: any) => {
       return { title: e.title, start: e.startDate, end: e.endDate, resource: e.resource }
-    }
+    };
 
     setEvents({ events: [...eventCopy, parsedUpdatedEvent(updatedEvent)] });
+    setActiveEvent(undefined);
     hideEditForm();
-  }
+  };
+
+  const deleteEvent = (activeEvent: Event) => {
+    const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e));
+    setEvents({ events: [...eventCopy] });
+    setActiveEvent(undefined);
+    hideEditForm();
+  };
 
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
     const title = window.prompt('New Event name')
@@ -57,6 +65,7 @@ function App() {
     <div className="App">
       <Task
         updateEvent={updateEvent}
+        deleteEvent={deleteEvent}
         activeEvent={activeEvent}
         show={show}
         onCancel={hideEditForm}>
