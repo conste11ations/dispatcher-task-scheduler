@@ -17,6 +17,14 @@ export const defaultEventsState = {
       resource: "Bill",
       eventType: "Other",
       location: "3440 St Laurent Blvd, Montreal, Quebec H2X 2T9"
+    },
+    {
+      start: moment().startOf("week").add(8, "hours").toDate(),
+      end: moment().startOf("week").add(8.5, "hours").toDate(),
+      title: "Goods Disposal",
+      resource: "Jim",
+      eventType: "Dropoff",
+      location: "Fine Recycling & Disposal @ 400 Eastern Ave Ste 202, Toronto, ON M4M 1B9"
     }
   ]
 };
