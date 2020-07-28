@@ -8,8 +8,8 @@ export const defaultEventsState = {
       title: "Example event"
     },
     {
-      start: moment().add(2, "days").toDate(),
-      end: moment().add(2, "days").add(3, "hours").toDate(),
+      start: moment().add(2, "days").startOf("day").add(14.5, "hours").toDate(),
+      end: moment().add(2, "days").startOf("day").add(17, "hours").toDate(),
       title: "Another event"
     }
   ]
