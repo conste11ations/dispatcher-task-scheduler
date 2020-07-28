@@ -11,9 +11,9 @@ export interface Event {
   title: string;
   start: Date;
   end: Date;
-  resource?: string;
-  eventType?: string;
-  location?: string;
+  resource: string;
+  eventType: string;
+  location: string;
 }
 
 const localizer = momentLocalizer(moment);
@@ -58,8 +58,12 @@ function App() {
 
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
     const title = window.prompt('New Event name')
+    // to change the following 3 var
+    const resource = "Jim";
+    const eventType = "Dropoff";
+    const location = "Temp location"
     if (title)
-      setEvents({ events: [...events.events, { start, end, title }] });
+      setEvents({ events: [...events.events, { start, end, title, resource, eventType, location }] });
     console.log(start, end, title)
   }
 

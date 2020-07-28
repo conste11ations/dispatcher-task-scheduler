@@ -15,9 +15,9 @@ interface Values {
   title: string;
   startDate: Date;
   endDate: Date;
-  resource?: string;
-  eventType?: string;
-  location?: string;
+  resource: string;
+  eventType: string;
+  location: string;
 }
 
 export interface Event {
@@ -25,9 +25,9 @@ export interface Event {
   title: string;
   start: Date;
   end: Date;
-  resource?: string;
-  eventType?: string;
-  location?: string;
+  resource: string;
+  eventType: string;
+  location: string;
 }
 
 const Form = ({ updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
