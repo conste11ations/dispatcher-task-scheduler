@@ -5,6 +5,8 @@ import { defaultEventsState } from "./constants/events";
 import Task from "./components/index"
 import "./App.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import DriverFilter from "./components/DriverFilter";
+import Extract from "./components/Extract";
 
 export interface Event {
   allDay?: boolean;
@@ -72,6 +74,10 @@ function App() {
         show={show}
         onCancel={hideEditForm}>
       </Task>
+      <div id="secondary-nav" style={{ display: "flex", justifyContent: "space-between", fontFamily: "inherit"}}>
+        <DriverFilter></DriverFilter>
+        <Extract></Extract>
+      </div>
       <Calendar
         dayLayoutAlgorithm="no-overlap"
         selectable
