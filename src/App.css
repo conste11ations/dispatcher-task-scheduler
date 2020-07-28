@@ -347,3 +347,41 @@ td.rdtYear:hover {
 .rbc-time-header .rbc-overflowing {
   margin-right: 0px;
 }
+
+.secondary-nav-filter {
+  display: inline-block;
+  color: #373a3c;
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+  background: none;
+  background-image: none;
+  border: 1px solid #ccc;
+  padding: .375rem 1rem;
+  border-radius: 4px;
+  line-height: normal;
+  white-space: nowrap; 
+}
+
+.secondary-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  line-height: normal;
+  font-size: 16px; 
+}
+
+.extract-title {
+  display: inline-block;
+  color: #373a3c;
+  text-align: center;
+  vertical-align: middle;
+  background: none;
+  background-image: none;
+  padding: .375rem 1rem;
+  border-radius: 4px;
+  line-height: normal;
+  white-space: nowrap; 
+}

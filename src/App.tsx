@@ -74,12 +74,12 @@ function App() {
         show={show}
         onCancel={hideEditForm}>
       </Task>
-      <div id="secondary-nav" style={{ display: "flex", justifyContent: "space-between", fontFamily: "inherit"}}>
+      <div id="secondary-nav" style={{ display: "flex", fontFamily: "inherit"}} className="secondary-nav">
         <DriverFilter></DriverFilter>
         <Extract></Extract>
       </div>
       <Calendar
-        dayLayoutAlgorithm="no-overlap"
+        // dayLayoutAlgorithm="no-overlap"
         selectable
         localizer={localizer}
         defaultDate={new Date()}
