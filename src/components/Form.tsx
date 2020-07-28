@@ -15,7 +15,9 @@ interface Values {
   title: string;
   startDate: Date;
   endDate: Date;
-  resource: string;
+  resource?: string;
+  eventType?: string;
+  location?: string;
 }
 
 export interface Event {
@@ -23,13 +25,14 @@ export interface Event {
   title: string;
   start: Date;
   end: Date;
-  resource?: any;
+  resource?: string;
+  eventType?: string;
+  location?: string;
 }
 
-const Edit = ({ updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
+const Form = ({ updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
-  const initValues = { title: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end, resource: activeEvent.resource }
-  // console.log("nit", initValues);
+  const initValues = { title: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end, resource: activeEvent.resource, eventType: activeEvent.eventType, location: activeEvent.location }
 
   return (
     <div className={showHideClassName}>
@@ -62,15 +65,47 @@ const Edit = ({ updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
             </div>
             <div className="formElems">
               <label htmlFor="resource">Event<br />Resource</label>
+              <select
+                name="resource"
+                value={props.values.resource}
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                style={{ display: 'block' }}
+              >
+                <option value="" label="Select a driver" />
+                <option value="Bill" label="Bill" />
+                <option value="Mary" label="Mary" />
+                <option value="Jim" label="Jim" />
+              </select>
+            </div>
+            <div className="formElems">
+              <label htmlFor="eventType">Event<br />Type</label>
+              <select
+                name="eventType"
+                value={props.values.eventType}
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                style={{ display: 'block' }}
+              >
+                <option value="" label="Select an event type" />
+                <option value="Pickup" label="Pickup" />
+                <option value="Dropoff" label="Dropoff" />
+                <option value="Other" label="Other" />
+              </select>
+            </div>
+            <div className="formElems">
+              <label htmlFor="location">Event<br />Location</label>
               <input
-                id="resource"
+                id="location"
                 type="text"
                 onChange={props.handleChange}
                 onBlur={props.handleBlur}
-                value={props.values.resource}
-                name="resource"
+                value={props.values.location}
+                name="location"
               />
             </div>
+            {props.errors.resource && props.touched.resource && <div className="input-feedback">{props.errors.resource}</div>}
+            {props.errors.eventType && props.touched.eventType && <div className="input-feedback">{props.errors.eventType}</div>}
             {props.errors.title && <div id="feedback">{props.errors.title}</div>}
             <div>
               <button className="button" type="submit">Update</button>
@@ -84,4 +119,4 @@ const Edit = ({ updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
   );
 }
 
-export default Edit;
+export default Form;

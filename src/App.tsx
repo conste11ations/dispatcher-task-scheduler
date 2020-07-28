@@ -11,7 +11,9 @@ export interface Event {
   title: string;
   start: Date;
   end: Date;
-  resource?: any;
+  resource?: string;
+  eventType?: string;
+  location?: string;
 }
 
 const localizer = momentLocalizer(moment);
@@ -39,7 +41,7 @@ function App() {
 
     const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e));
     const parsedUpdatedEvent = (e: any) => {
-      return { title: e.title, start: e.startDate, end: e.endDate, resource: e.resource }
+      return { title: e.title, start: e.startDate, end: e.endDate, resource: e.resource, eventType: e.eventType, location: e.location }
     };
 
     setEvents({ events: [...eventCopy, parsedUpdatedEvent(updatedEvent)] });
@@ -71,6 +73,7 @@ function App() {
         onCancel={hideEditForm}>
       </Task>
       <Calendar
+        dayLayoutAlgorithm="no-overlap"
         selectable
         localizer={localizer}
         defaultDate={new Date()}
