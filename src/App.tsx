@@ -39,7 +39,6 @@ function App() {
   };
 
   const updateEvent = (activeEvent: Event, updatedEvent: Event) => {
-
     const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e));
     const parsedUpdatedEvent = (e: any) => {
       return { title: e.title, start: e.startDate, end: e.endDate, resource: e.resource, eventType: e.eventType, location: e.location }
@@ -59,18 +58,8 @@ function App() {
 
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
     setOperation("CREATE");
-    // to change the following 3 var
-    const title = "";
-    const resource = "";
-    const eventType = "";
-    const location = ""
-    console.log(start, end, slots, action)
-    // const title = window.prompt('New Event name');
-    setActiveEvent({ start, end, title, resource, eventType, location });
+    setActiveEvent({ start, end, title: "", resource: "", eventType: "", location: "" });
     setShow(true);
-
-    // if (title)
-    //   setEvents({ events: [...events.events, { start, end, title, resource, eventType, location }] });
   }
 
   return (
