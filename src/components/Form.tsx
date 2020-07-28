@@ -4,6 +4,7 @@ import { Formik, Field } from 'formik';
 import FormikDateTime from "./FormikDateTime";
 
 interface t {
+  operation: "CREATE" | "EDIT" | "",
   updateEvent: any,
   deleteEvent: any,
   activeEvent: Event,
@@ -30,13 +31,13 @@ export interface Event {
   location: string;
 }
 
-const Form = ({ updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
+const Form = ({ operation, updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
   const initValues = { title: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end, resource: activeEvent.resource, eventType: activeEvent.eventType, location: activeEvent.location }
 
   return (
     <div className={showHideClassName}>
-      <h2>Modifying the following event:</h2>
+      <h2>{operation === "CREATE" ? "Create an Event" : "Modify an Event"}</h2>
       <Formik
         enableReinitialize
         initialValues={initValues}
@@ -108,9 +109,10 @@ const Form = ({ updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
             {props.errors.eventType && props.touched.eventType && <div className="input-feedback">{props.errors.eventType}</div>}
             {props.errors.title && <div id="feedback">{props.errors.title}</div>}
             <div>
-              <button className="button" type="submit">Update</button>
+              {operation === "EDIT" && <button className="button" type="submit">Update</button>}
+              {operation === "CREATE" && <button className="button" type="submit">Create</button>}
               <button className="button" type="button" value="back" onClick={() => onCancel()}>Cancel</button>
-              <button className="button" type="button" onClick={() => deleteEvent(activeEvent)}>Delete</button>
+              {operation === "EDIT" && <button className="button" type="button" onClick={() => deleteEvent(activeEvent)}>Delete</button>}
             </div>
           </form>
         )}

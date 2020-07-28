@@ -20,15 +20,16 @@ const localizer = momentLocalizer(moment);
 
 function App() {
   const [events, setEvents] = useState(defaultEventsState);
-  const [activeEvent, setActiveEvent] = useState(undefined)
+  const [activeEvent, setActiveEvent] = useState({});
   const [show, setShow] = useState(false);
+  const [operation, setOperation] = useState("");
 
   const isActiveEvent = (activeEvent: Event, event: Event) => {
     return activeEvent === event;
   }
 
-
   const showEditForm = (event: any) => {
+    setOperation("EDIT");
     setActiveEvent(event);
     setShow(true);
   };
@@ -45,31 +46,37 @@ function App() {
     };
 
     setEvents({ events: [...eventCopy, parsedUpdatedEvent(updatedEvent)] });
-    setActiveEvent(undefined);
+    // setActiveEvent(undefined);
     hideEditForm();
   };
 
   const deleteEvent = (activeEvent: Event) => {
     const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e));
     setEvents({ events: [...eventCopy] });
-    setActiveEvent(undefined);
+    // setActiveEvent(undefined);
     hideEditForm();
   };
 
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
-    const title = window.prompt('New Event name')
+    setOperation("CREATE");
     // to change the following 3 var
-    const resource = "Jim";
-    const eventType = "Dropoff";
-    const location = "Temp location"
-    if (title)
-      setEvents({ events: [...events.events, { start, end, title, resource, eventType, location }] });
-    console.log(start, end, title)
+    const title = "";
+    const resource = "";
+    const eventType = "";
+    const location = ""
+    console.log(start, end, slots, action)
+    // const title = window.prompt('New Event name');
+    setActiveEvent({ start, end, title, resource, eventType, location });
+    setShow(true);
+
+    // if (title)
+    //   setEvents({ events: [...events.events, { start, end, title, resource, eventType, location }] });
   }
 
   return (
     <div className="App">
       <Task
+        operation={operation}
         updateEvent={updateEvent}
         deleteEvent={deleteEvent}
         activeEvent={activeEvent}
