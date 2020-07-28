@@ -21,7 +21,7 @@ export interface Event {
 const localizer = momentLocalizer(moment);
 
 function App() {
-  const [events, setEvents] = useState(defaultEventsState);
+  const [events, setEvents] = useState(defaultEventsState); // events obj in place of a database
   const [activeEvent, setActiveEvent] = useState({});
   const [show, setShow] = useState(false);
   const [operation, setOperation] = useState("");
@@ -47,14 +47,12 @@ function App() {
     };
 
     setEvents({ events: [...eventCopy, parsedUpdatedEvent(updatedEvent)] });
-    // setActiveEvent(undefined);
     hideEditForm();
   };
 
   const deleteEvent = (activeEvent: Event) => {
     const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e));
     setEvents({ events: [...eventCopy] });
-    // setActiveEvent(undefined);
     hideEditForm();
   };
 
@@ -75,7 +73,10 @@ function App() {
         onCancel={hideEditForm}>
       </Task>
       <div id="secondary-nav" style={{ display: "flex", fontFamily: "inherit"}} className="secondary-nav">
-        <DriverFilter></DriverFilter>
+        <DriverFilter>
+          events={events.events}
+          setEvents={setEvents}
+        </DriverFilter>
         <Extract></Extract>
       </div>
       <Calendar
