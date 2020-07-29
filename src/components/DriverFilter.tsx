@@ -37,7 +37,6 @@ const DriverFilter = (props: any) => {
               <option value="Jim" label="Jim" />
             </select>
           </div>
-          
         </form>
       )}
     </Formik >
