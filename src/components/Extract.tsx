@@ -19,7 +19,7 @@ const Extract = (props: any) => {
     <Formik
       enableReinitialize
       initialValues={initValues}
-      onSubmit={values => createCSVFile(props.events, parseInt(values.dateRange), "Jim")}
+      onSubmit={values => createCSVFile(props.events, parseInt(values.dateRange))}
     >
       {props => (
         <form onChange={props.handleSubmit}>

@@ -12,22 +12,33 @@ export interface Event {
   display: boolean;
 }
 
-export const createCSVFile = (events: Event[], dateRange: number, driver: string) => {
-  // probably need an activeDriver state?
+export const createCSVFile = (events: Event[], dateRange: number) => {
+
   // come up with array of date ranges: divideDates()
-  // filter for the active driver
+  // filter only events that have display: show (courtesy of filterEvents)
   // countActivityByDateRange()
   // write to obj (JSON) (this fn)
   // turn into CSV format and write to file (this fn)
 
-console.log("createCSVFile", events);
-console.log(divideDates(dateRange));
+const dateTuples = divideDates(dateRange);
+const filteredEvents = events.filter(e => e.display === true);
 
+let extractArray = []; // [[date1-date2, 2, 2, 1], [date2-date3, 0, 1, 2], ...]
 
+for (const tuple of dateTuples) {
+  let record = [];
+  record.push(tuple[0] + " - " + tuple[1]);
+  record.push(countActivityByDateRange(tuple[0], tuple[1], filteredEvents, "Pickup"));
+  record.push(countActivityByDateRange(tuple[0], tuple[1], filteredEvents, "Dropoff"));
+  record.push(countActivityByDateRange(tuple[0], tuple[1], filteredEvents, "Other"));
+  extractArray.push(record);
 }
 
-export const ConvertToCSV = (events: Event[]) => {
-  var array = typeof events != 'object' ? JSON.parse(events) : events;
+console.log("extractArray", extractArray);
+}
+
+export const ConvertToCSV = (objArray: object[]) => {
+  var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
   var str = '';
 
   for (var i = 0; i < array.length; i++) {
@@ -40,7 +51,7 @@ export const ConvertToCSV = (events: Event[]) => {
 
       str += line + '\r\n';
   }
-  console.log(str);
+  console.log("convertToCSV", str);
   return str;
 }
 
@@ -57,10 +68,10 @@ export const divideDates = (dateRange: number) => {
     result.push([currentDate, currentDatePlusDateRange]);
     currentDate = currentDatePlusDateRange;
   }
-
   return result;
 }
 
 export const countActivityByDateRange = (startDate: Date, endDate: Date, events: Event[], activity: string) => {
-
+  
+  return 1;
 }
