@@ -12,6 +12,11 @@
   pointer-events: none;
 }
 
+h1 {
+  color: #fff;
+  text-shadow: 2px 2px lightslategray;
+}
+
 .edit {
   color: #000;
   background-color: rgb(216, 233, 253);
@@ -56,7 +61,7 @@
 }
 
 .edit label {
-  color: #000;
+  color:gray;
   display: block;
   margin-bottom: .5rem;
   width: 100px;

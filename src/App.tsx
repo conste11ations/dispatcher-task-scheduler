@@ -7,6 +7,7 @@ import "./App.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DriverFilter from "./components/DriverFilter";
 import Extract from "./components/Extract";
+import { displayVisibleEvents } from "./helpers/filterEvents";
 
 export interface Event {
   allDay?: boolean;
@@ -22,7 +23,7 @@ export interface Event {
 const localizer = momentLocalizer(moment);
 
 function App() {
-  const [events, setEvents] = useState(defaultEventsState); // events obj in place of a database
+  const [events, setEvents] = useState(defaultEventsState); // events state in place of a database
   const [activeEvent, setActiveEvent] = useState({});
   const [show, setShow] = useState(false);
   const [operation, setOperation] = useState("");
@@ -61,11 +62,6 @@ function App() {
     setOperation("CREATE");
     setActiveEvent({ start, end, title: "", resource: "", eventType: "", location: "", display: true });
     setShow(true);
-  }
-
-  const displayVisibleEvents = (events: Event[]) => {
-    // filter events that have display: show
-    return events.filter(e => e.display === true)
   }
 
   return (

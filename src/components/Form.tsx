@@ -38,7 +38,7 @@ const Form = ({ operation, updateEvent, deleteEvent, activeEvent, onCancel, show
 
   return (
     <div className={showHideClassName}>
-      <h2>{operation === "CREATE" ? "Create an Event" : "Modify an Event"}</h2>
+      <h1>{operation === "CREATE" ? "Create an Event" : "Modify an Event"}</h1>
       <Formik
         enableReinitialize
         initialValues={initValues}
