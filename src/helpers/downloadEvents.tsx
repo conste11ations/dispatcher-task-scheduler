@@ -37,10 +37,37 @@ export const createCSVFile = (events: Event[], dateRange: number) => {
     record.push(countActivityByDateRange(tuple[0], tuple[1], filteredEvents, "Other"));
     extractArray.push(record);
   }
-  console.log(ConvertToCSV(extractArray))
+  // console.log(convertToCSV(extractArray));
+  // writeToFile('./test.txt', convertToCSV(extractArray));
+  triggerDownload(convertForStreaming(extractArray), `schedule-dateRange-${dateRange}-days.csv`);
 }
 
-export const ConvertToCSV = (objArray: object[]) => {
+export const triggerDownload = (dataStream: string, fileName: string) => {
+    let a = document.createElement('a');
+    a.href = 'data:application/octet-stream,' + dataStream;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+export const convertForStreaming = (objArray: object[]) => {
+  const array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+  let str = "Time-Frame%2CPickup%2CDrop-off%2COther%0A";
+
+  for (let i = 0; i < array.length; i++) {
+    let line = '';
+    for (const index in array[i]) {
+      if (line != '') line += '%2C'
+
+      line += array[i][index];
+    }
+    str += line + '%0A';
+  }
+  return str;
+}
+
+export const convertToCSV = (objArray: object[]) => {
   const array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
   let str = "Time-Frame, Pickup, Drop-off, Other\r\n";
 
@@ -64,7 +91,7 @@ export const divideDates = (dateRange: number) => {
 
   const iterations = Math.floor(365 / dateRange);
 
-  for (let i = 0; i <= iterations; i++) {
+  for (let i = 0; i < iterations; i++) {
     const currentDatePlusDateRange = moment(currentDate).add(dateRange, "day").toDate();
     result.push([currentDate, currentDatePlusDateRange]);
     currentDate = currentDatePlusDateRange;

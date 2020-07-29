@@ -24,7 +24,7 @@ const Extract = (props: any) => {
       {props => (
         <form onSubmit={props.handleSubmit}>
           <div style={{ display: "flex" }}>
-            <button type="submit" className="button" style={{marginTop: "0px", marginBottom: "0px"}}>Download Schedule:</button>
+            <button id="download-schedule" type="submit" className="button" style={{marginTop: "0px", marginBottom: "0px"}}>Download Schedule:</button>
             <select className="secondary-nav-filter"
               name="dateRange"
               value={props.values.dateRange}
