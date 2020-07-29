@@ -78,7 +78,7 @@ h1 {
   background: none;
   background-color: #ccc;
   background-image: none;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(173, 170, 170);
   padding: .375rem 1rem;
   border-radius: 4px;
   line-height: normal;
