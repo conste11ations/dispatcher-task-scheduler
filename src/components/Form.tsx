@@ -57,12 +57,12 @@ const Form = ({ operation, updateEvent, deleteEvent, activeEvent, onCancel, show
                 name="title"
               />
             </div>
-            <div className="formElems">
-              <label htmlFor="startDate" style={{ marginRight: "-6px" }}>Start<br />Datetime</label>
+            <div className="formElems" style={{ paddingBottom: "0px" }}>
+              <label htmlFor="startDate" style={{ marginTop: "-5px", marginRight: "-6px" }}>Start<br />Datetime</label>
               <Field name="startDate" defaultValue={props.values.startDate} timeFormat={true} component={FormikDateTime} />
             </div>
-            <div className="formElems">
-              <label htmlFor="endDate" style={{ marginRight: "-6px" }}>End<br />Datetime</label>
+            <div className="formElems" style={{ marginTop: "-5px", paddingBottom: "0px" }}>
+              <label htmlFor="endDate" style={{ marginTop: "-5px", marginRight: "-6px" }}>End<br />Datetime</label>
               <Field name="endDate" defaultValue={props.values.endDate} timeFormat={true} component={FormikDateTime} />
             </div>
             <div className="formElems">

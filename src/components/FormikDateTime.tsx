@@ -7,7 +7,7 @@ const FormikDateTime = ({ field, defaultValue, form, timeFormat }: { field: any,
   const onFieldChange = (value: any) => {
     let dateValue = value;
 
-      dateValue = moment(value).toDate();
+    dateValue = moment(value).toDate();
 
     form.setFieldValue(field.name, dateValue);
   }
@@ -17,13 +17,13 @@ const FormikDateTime = ({ field, defaultValue, form, timeFormat }: { field: any,
   }
 
   return (
-    <Datetime
-      defaultValue={defaultValue}
-      value={defaultValue}
-      inputProps={{ id: field.name }}
-      onChange={onFieldChange}
-      onBlur={onFieldBlur}
-    />
+      <Datetime
+        defaultValue={defaultValue}
+        value={defaultValue}
+        inputProps={{ id: field.name }}
+        onChange={onFieldChange}
+        onBlur={onFieldBlur}
+      />
   );
 }
 
