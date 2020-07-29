@@ -19,7 +19,7 @@ const DriverFilter = (props: any) => {
     <Formik
       enableReinitialize
       initialValues={initValues}
-      onSubmit={values => props.setEvents(filterEventsByDriver(props.events, "Bill"))}
+      onSubmit={values => props.setEvents(filterEventsByDriver(props.events, values.driver))}
     >
       {props => (
         <form onChange={props.handleSubmit}>

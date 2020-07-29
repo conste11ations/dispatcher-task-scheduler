@@ -79,9 +79,9 @@ function App() {
         onCancel={hideEditForm}>
       </Task>
       <div id="secondary-nav" style={{ display: "flex", fontFamily: "inherit"}} className="secondary-nav">
-        <DriverFilter>
+        <DriverFilter
           events={events.events}
-          setEvents={setEvents}
+          setEvents={setEvents}>
         </DriverFilter>
         <Extract></Extract>
       </div>

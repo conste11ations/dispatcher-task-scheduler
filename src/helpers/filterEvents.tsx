@@ -10,5 +10,9 @@ export interface Event {
 }
 
 export const filterEventsByDriver = (events: Event[], driver: string) => {
-  return events.filter(e => e.resource === driver);
+
+  driver === "" ?
+    events.map(e => e.display = true) :
+    events.map(e => e.display = e.resource === driver ? true : false);
+  return { events };
 }
