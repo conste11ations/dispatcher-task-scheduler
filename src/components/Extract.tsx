@@ -22,9 +22,9 @@ const Extract = (props: any) => {
       onSubmit={values => createCSVFile(props.events, parseInt(values.dateRange))}
     >
       {props => (
-        <form onChange={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit}>
           <div style={{ display: "flex" }}>
-            <span className="extract-title">Download Schedule:</span>
+            <button type="submit" className="extract-title">Download Schedule:</button>
             <select className="secondary-nav-filter"
               name="dateRange"
               value={props.values.dateRange}
