@@ -13,20 +13,9 @@ export interface Event {
 }
 
 export const createCSVFile = (events: Event[], dateRange: number) => {
-
-  // come up with array of date ranges: divideDates()
-  // filter only events that have display: show (courtesy of filterEvents)
-  // countActivityByDateRange()
-  // write to obj (JSON) (this fn)
-  // turn into CSV format
-
-  //write to file (this fn)
-  //trigger download of file
-
   const date_format = "YYYY/MM/DD";
   const dateTuples = divideDates(dateRange);
   const filteredEvents = events.filter(e => e.display === true);
-
   let extractArray = [];
 
   for (const tuple of dateTuples) {
@@ -37,8 +26,6 @@ export const createCSVFile = (events: Event[], dateRange: number) => {
     record.push(countActivityByDateRange(tuple[0], tuple[1], filteredEvents, "Other"));
     extractArray.push(record);
   }
-  // console.log(convertToCSV(extractArray));
-  // writeToFile('./test.txt', convertToCSV(extractArray));
   triggerDownload(convertForStreaming(extractArray), `schedule-dateRange-${dateRange}-days.csv`);
 }
 
@@ -67,28 +54,10 @@ export const convertForStreaming = (objArray: object[]) => {
   return str;
 }
 
-export const convertToCSV = (objArray: object[]) => {
-  const array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-  let str = "Time-Frame, Pickup, Drop-off, Other\r\n";
-
-  for (let i = 0; i < array.length; i++) {
-    let line = '';
-    for (const index in array[i]) {
-      if (line != '') line += ','
-
-      line += array[i][index];
-    }
-    str += line + '\r\n';
-  }
-  return str;
-}
-
 export const divideDates = (dateRange: number) => {
   const todayDate = moment().startOf("day").toDate();
   let currentDate = todayDate;
-  // let result: {[k: string]: any} = {};
   let result = [];
-
   const iterations = Math.floor(365 / dateRange);
 
   for (let i = 0; i < iterations; i++) {
