@@ -8,7 +8,8 @@ export const defaultEventsState = {
       title: "Seafood Shipment",
       resource: "Mary",
       eventType: "Pickup",
-      location: "10 York St, Toronto, ON M5J 2L9"
+      location: "10 York St, Toronto, ON M5J 2L9",
+      display: true
     },
     {
       start: moment().add(2, "days").startOf("day").add(14.5, "hours").toDate(),
@@ -16,7 +17,8 @@ export const defaultEventsState = {
       title: "Coffee Break at Esso Couche-Tard",
       resource: "Bill",
       eventType: "Other",
-      location: "3440 St Laurent Blvd, Montreal, Quebec H2X 2T9"
+      location: "3440 St Laurent Blvd, Montreal, Quebec H2X 2T9",
+      display: true
     },
     {
       start: moment().startOf("week").add(8, "hours").toDate(),
@@ -24,7 +26,8 @@ export const defaultEventsState = {
       title: "Goods Disposal",
       resource: "Jim",
       eventType: "Dropoff",
-      location: "Fine Recycling & Disposal @ 400 Eastern Ave Ste 202, Toronto, ON M4M 1B9"
+      location: "Fine Recycling & Disposal @ 400 Eastern Ave Ste 202, Toronto, ON M4M 1B9",
+      display: true
     }
   ]
 };

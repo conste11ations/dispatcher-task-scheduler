@@ -8,6 +8,7 @@ export interface Event {
   resource: string;
   eventType: string;
   location: string;
+  display: boolean;
 }
 
 export const ConvertToCSV = (events: Event[]) => {

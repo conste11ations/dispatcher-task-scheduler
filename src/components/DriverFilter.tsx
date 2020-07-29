@@ -10,6 +10,7 @@ export interface Event {
   resource: string;
   eventType: string;
   location: string;
+  display: boolean;
 }
 
 const DriverFilter = (props: any) => {

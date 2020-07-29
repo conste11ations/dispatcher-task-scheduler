@@ -6,6 +6,7 @@ export interface Event {
   resource: string;
   eventType: string;
   location: string;
+  display: boolean;
 }
 
 export const filterEventsByDriver = (events: Event[], driver: string) => {

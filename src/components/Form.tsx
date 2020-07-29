@@ -29,11 +29,12 @@ export interface Event {
   resource: string;
   eventType: string;
   location: string;
+  display: boolean;
 }
 
 const Form = ({ operation, updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
-  const initValues = { title: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end, resource: activeEvent.resource, eventType: activeEvent.eventType, location: activeEvent.location }
+  const initValues = { title: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end, resource: activeEvent.resource, eventType: activeEvent.eventType, location: activeEvent.location, display: true }
 
   return (
     <div className={showHideClassName}>

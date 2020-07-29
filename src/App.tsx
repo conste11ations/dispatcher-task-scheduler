@@ -16,6 +16,7 @@ export interface Event {
   resource: string;
   eventType: string;
   location: string;
+  display: boolean;
 }
 
 const localizer = momentLocalizer(moment);
@@ -43,7 +44,7 @@ function App() {
   const updateEvent = (activeEvent: Event, updatedEvent: Event) => {
     const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e));
     const parsedUpdatedEvent = (e: any) => {
-      return { title: e.title, start: e.startDate, end: e.endDate, resource: e.resource, eventType: e.eventType, location: e.location }
+      return { title: e.title, start: e.startDate, end: e.endDate, resource: e.resource, eventType: e.eventType, location: e.location, display: e.display }
     };
 
     setEvents({ events: [...eventCopy, parsedUpdatedEvent(updatedEvent)] });
@@ -58,8 +59,13 @@ function App() {
 
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
     setOperation("CREATE");
-    setActiveEvent({ start, end, title: "", resource: "", eventType: "", location: "" });
+    setActiveEvent({ start, end, title: "", resource: "", eventType: "", location: "", display: true });
     setShow(true);
+  }
+
+  const displayVisibleEvents = (events: Event[]) => {
+    // filter events that have display: show
+    return events.filter(e => e.display === true)
   }
 
   return (
@@ -85,7 +91,7 @@ function App() {
         localizer={localizer}
         defaultDate={new Date()}
         defaultView={"week"}
-        events={events.events}
+        events={displayVisibleEvents(events.events)}
         onSelectEvent={event => showEditForm(event)}
         onSelectSlot={handleSelect}
         style={{ margin: "auto", height: "90vh", width: "90vw" }}
