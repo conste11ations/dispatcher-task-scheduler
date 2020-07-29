@@ -74,12 +74,14 @@ function App() {
         show={show}
         onCancel={hideEditForm}>
       </Task>
-      <div id="secondary-nav" style={{ display: "flex", fontFamily: "inherit"}} className="secondary-nav">
+      <div id="secondary-nav" style={{ display: "flex", fontFamily: "inherit" }} className="secondary-nav">
         <DriverFilter
           events={events.events}
           setEvents={setEvents}>
         </DriverFilter>
-        <Extract></Extract>
+        <Extract
+          events={events.events}>
+        </Extract>
       </div>
       <Calendar
         // dayLayoutAlgorithm="no-overlap"

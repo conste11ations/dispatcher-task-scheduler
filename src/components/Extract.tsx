@@ -1,5 +1,6 @@
 import React from "react";
-import { Formik } from 'formik';
+import { Formik } from "formik";
+import { createCSVFile } from "../helpers/downloadEvents";
 
 export interface Event {
   allDay?: boolean;
@@ -18,7 +19,7 @@ const Extract = (props: any) => {
     <Formik
       enableReinitialize
       initialValues={initValues}
-      onSubmit={values => console.log(values)}
+      onSubmit={values => createCSVFile(props.events, parseInt(values.dateRange), "Jim")}
     >
       {props => (
         <form onChange={props.handleSubmit}>
