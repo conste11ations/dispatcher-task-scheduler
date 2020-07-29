@@ -21,6 +21,7 @@ export const createCSVFile = (events: Event[], dateRange: number) => {
   // turn into CSV format
 
   //write to file (this fn)
+  //trigger download of file
 
   const date_format = "YYYY/MM/DD";
   const dateTuples = divideDates(dateRange);
@@ -40,7 +41,6 @@ export const createCSVFile = (events: Event[], dateRange: number) => {
 }
 
 export const ConvertToCSV = (objArray: object[]) => {
-  //dont forget to put header
   const array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
   let str = "Time-Frame, Pickup, Drop-off, Other\r\n";
 
@@ -51,7 +51,6 @@ export const ConvertToCSV = (objArray: object[]) => {
 
       line += array[i][index];
     }
-
     str += line + '\r\n';
   }
   return str;
