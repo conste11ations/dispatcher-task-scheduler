@@ -9,6 +9,7 @@ import DriverFilter from "./components/DriverFilter";
 import Extract from "./components/Extract";
 import { displayVisibleEvents } from "./helpers/filterEvents";
 import { isActiveEvent } from "./helpers/validateEvents";
+import useVisualMode from "./hooks/useVisualMode";
 
 export interface Event {
   allDay?: boolean;
@@ -27,10 +28,16 @@ function App() {
   const [events, setEvents] = useState(defaultEventsState); // events state in place of a database
   const [activeEvent, setActiveEvent] = useState({});
   const [show, setShow] = useState(false);
-  const [operation, setOperation] = useState("");
+
+  const SHOW = "SHOW";
+  const CREATE = "CREATE";
+  const EDIT = "EDIT";
+  const DELETE = "DELETE";
+
+  const { mode, transition, back } = useVisualMode(SHOW);
 
   const showEditForm = (event: any) => {
-    setOperation("EDIT");
+    transition("EDIT");
     setActiveEvent(event);
     setShow(true);
   };
@@ -56,7 +63,7 @@ function App() {
   };
 
   const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
-    setOperation("CREATE");
+    transition("CREATE");
     setActiveEvent({ start, end, title: "", resource: "", eventType: "", location: "", display: true });
     setShow(true);
   }
@@ -64,7 +71,7 @@ function App() {
   return (
     <div className="App">
       <Task
-        operation={operation}
+        operation={mode}
         updateEvent={updateEvent}
         deleteEvent={deleteEvent}
         activeEvent={activeEvent}
