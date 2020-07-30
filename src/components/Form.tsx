@@ -5,11 +5,14 @@ import FormikDateTime from "./FormikDateTime";
 
 interface t {
   operation: "CREATE" | "EDIT" | "",
+  events: Event[];
+  validateEvent: any;
   updateEvent: any,
   deleteEvent: any,
   activeEvent: Event,
   onCancel: any,
   show: boolean,
+  feedback: string;
 }
 
 interface Values {
@@ -32,7 +35,7 @@ interface Event {
   display: boolean;
 }
 
-const Form = ({ operation, updateEvent, deleteEvent, activeEvent, onCancel, show }: t) => {
+const Form = ({ operation, events, validateEvent, updateEvent, deleteEvent, activeEvent, onCancel, show, feedback }: t) => {
   const showHideClassName = show ? "edit display-block" : "edit display-none";
   const initValues = { title: activeEvent.title, startDate: activeEvent.start, endDate: activeEvent.end, resource: activeEvent.resource, eventType: activeEvent.eventType, location: activeEvent.location, display: true }
 
@@ -42,7 +45,7 @@ const Form = ({ operation, updateEvent, deleteEvent, activeEvent, onCancel, show
       <Formik
         enableReinitialize
         initialValues={initValues}
-        onSubmit={(values: Values) => updateEvent(activeEvent, values)}
+        onSubmit={(values: Values) => validateEvent(operation, activeEvent, values, events) && updateEvent(activeEvent, values)}
       >
         {props => (
           <form onSubmit={props.handleSubmit}>
@@ -106,6 +109,7 @@ const Form = ({ operation, updateEvent, deleteEvent, activeEvent, onCancel, show
                 name="location"
               />
             </div>
+            {feedback && <div className="feedback">{feedback}</div>}
             {props.errors.resource && props.touched.resource && <div className="input-feedback">{props.errors.resource}</div>}
             {props.errors.eventType && props.touched.eventType && <div className="input-feedback">{props.errors.eventType}</div>}
             {props.errors.title && <div id="feedback">{props.errors.title}</div>}

@@ -391,3 +391,13 @@ td.rdtYear:hover {
   line-height: normal;
   white-space: nowrap; 
 }
+
+/* form feedback */
+
+.feedback {
+  color: red;
+}
+
+.input-feedback {
+  color: red;
+}
