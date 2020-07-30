@@ -62,7 +62,7 @@ function App() {
     hideEditForm();
   };
 
-  const handleSelect = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
+  const createEvent = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
     transition("CREATE");
     setActiveEvent({ start, end, title: "", resource: "", eventType: "", location: "", display: true });
     setShow(true);
@@ -95,7 +95,7 @@ function App() {
         defaultView={"week"}
         events={displayVisibleEvents(events.events)}
         onSelectEvent={event => showEditForm(event)}
-        onSelectSlot={handleSelect}
+        onSelectSlot={createEvent}
         style={{ margin: "auto", height: "90vh", width: "90vw" }}
       />
     </div>
