@@ -8,6 +8,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import DriverFilter from "./components/DriverFilter";
 import Extract from "./components/Extract";
 import { displayVisibleEvents } from "./helpers/filterEvents";
+import { isActiveEvent } from "./helpers/validateEvents";
 
 export interface Event {
   allDay?: boolean;
@@ -27,10 +28,6 @@ function App() {
   const [activeEvent, setActiveEvent] = useState({});
   const [show, setShow] = useState(false);
   const [operation, setOperation] = useState("");
-
-  const isActiveEvent = (activeEvent: Event, event: Event) => {
-    return activeEvent === event;
-  }
 
   const showEditForm = (event: any) => {
     setOperation("EDIT");

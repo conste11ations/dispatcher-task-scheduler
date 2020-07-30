@@ -1,4 +1,4 @@
-export interface Event {
+interface Event {
   allDay?: boolean;
   title: string;
   start: Date;
