@@ -21,4 +21,4 @@
 ![delete-dts](https://user-images.githubusercontent.com/43900120/88993530-38f8d800-d2b4-11ea-95f0-0476f967da03.gif)
 
 ###### Downloading schedules (CSV) by driver according to time ranges
-
+![csv-dts](https://user-images.githubusercontent.com/43900120/88993931-3b0f6680-d2b5-11ea-9880-017b1ee774af.gif)
