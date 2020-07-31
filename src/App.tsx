@@ -38,6 +38,7 @@ function App() {
   const [activeEvent, setActiveEvent] = useState({});
   const [show, setShow] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [cached, setCached]: [any[], any] = useState([]);
 
   const CREATE = "CREATE";
   const EDIT = "EDIT";
@@ -55,13 +56,18 @@ function App() {
     setShow(false);
   };
 
-  const updateEvent = (activeEvent: Event, updatedEvent: Values) => {
+  const updateEvent = (activeEvent: Event, updatedEvent: any) => {
     const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e));
     const parsedUpdatedEvent = (e: any) => {
       return { title: e.title, start: e.startDate, end: e.endDate, resource: e.resource, eventType: e.eventType, location: e.location, display: e.display }
     };
 
-    setEvents({ events: [...eventCopy, parsedUpdatedEvent(updatedEvent)] });
+    if (cached.length > 0) {
+      setEvents({ events: [...eventCopy, parsedUpdatedEvent(updatedEvent), parsedUpdatedEvent(cached[0])] });
+      setCached([]);
+    } else {
+      setEvents({ events: [...eventCopy, parsedUpdatedEvent(updatedEvent)] });
+    }
     hideEditForm();
   };
 
@@ -69,6 +75,10 @@ function App() {
     const eventCopy = events.events.filter(e => !isActiveEvent(activeEvent, e));
     setEvents({ events: [...eventCopy] });
     hideEditForm();
+    if (cached.length > 0) {
+      updateEvent(activeEvent, cached[0]);
+      setCached([]);
+    }
   };
 
   const createEvent = ({ start, end, slots = [start, end], action = 'click' }: { start: any, end: any, slots: Date[] | string[], action: string }) => {
@@ -79,16 +89,26 @@ function App() {
   }
 
   const validateEvent: any = (mode: string, activeEvent: Event, eventToValidate: Values, events: Event[]) => {
-    console.log(eventToValidate);
+
     const conflictingEvents = checkForConflictingEvents(eventToValidate.startDate, eventToValidate.endDate, events);
-    console.log("conflictingEvents", conflictingEvents)
+
     if (conflictingEvents.length > 0) {
       setFeedback(`The event you are trying to create conflicts with the task above. 
         You can either update it or delete it!`);
-      setActiveEvent(conflictingEvents[0]);
+      setActiveEvent(conflictingEvents[conflictingEvents.length - 1]);
       transition(EDIT);
+      setCached([eventToValidate]);
       return false;
     } else {
+      if (cached.length > 0) {
+        const conflictsWithCached = checkForConflictingEvents(eventToValidate.startDate, eventToValidate.endDate, [{ ...cached[0], start: cached[0].startDate, end: cached[0].endDate }]);
+        console.log("conflictsWithCached", conflictsWithCached);
+        if (conflictsWithCached.length > 0) {
+          return false;
+        }
+        updateEvent(activeEvent, cached[0]);
+        setCached([]);
+      }
       setFeedback("");
       updateEvent(activeEvent, eventToValidate);
     }

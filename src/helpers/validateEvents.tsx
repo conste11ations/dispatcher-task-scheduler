@@ -15,10 +15,13 @@ export const isActiveEvent = (activeEvent: Event, event: Event) => {
 
 export const checkForConflictingEvents = (currentStart: Date, currentEnd: Date, events: Event[]) => {
   const startDateIntersects = (currentStart: Date, currentEnd: Date, e: Event) => {
-    return currentStart <= e.start && currentEnd >= e.start;
+    return currentStart < e.start && currentEnd > e.start;
   }
   const endDateIntersects = (currentStart: Date, currentEnd: Date, e: Event) => {
-    return currentStart <= e.end && currentEnd >= e.end;
+    return currentStart < e.end && currentEnd > e.end;
   }
-  return events.filter(e => startDateIntersects(currentStart, currentEnd, e) || endDateIntersects(currentStart, currentEnd, e));
+  const within = (currentStart: Date, currentEnd: Date, e: Event) => {
+    return currentStart >= e.start && currentEnd <= e.end;
+  }
+  return events.filter(e => startDateIntersects(currentStart, currentEnd, e) || endDateIntersects(currentStart, currentEnd, e) || within(currentStart, currentEnd, e));
 }
