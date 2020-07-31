@@ -42,9 +42,8 @@ function App() {
 
   const CREATE = "CREATE";
   const EDIT = "EDIT";
-  const DELETE = "DELETE";
 
-  const { mode, transition, back } = useVisualMode("");
+  const { mode, transition } = useVisualMode("");
 
   const showEditForm = (event: any) => {
     transition(EDIT);
@@ -61,8 +60,8 @@ function App() {
     const parsedUpdatedEvent = (e: any) => {
       return { title: e.title, start: e.startDate, end: e.endDate, resource: e.resource, eventType: e.eventType, location: e.location, display: e.display }
     };
+    if (cached.length > 0 && updatedEvent.startDate !== cached[0].startDate) {
 
-    if (cached.length > 0) {
       setEvents({ events: [...eventCopy, parsedUpdatedEvent(updatedEvent), parsedUpdatedEvent(cached[0])] });
       setCached([]);
     } else {
@@ -102,7 +101,6 @@ function App() {
     } else {
       if (cached.length > 0) {
         const conflictsWithCached = checkForConflictingEvents(eventToValidate.startDate, eventToValidate.endDate, [{ ...cached[0], start: cached[0].startDate, end: cached[0].endDate }]);
-        console.log("conflictsWithCached", conflictsWithCached);
         if (conflictsWithCached.length > 0) {
           return false;
         }
@@ -112,11 +110,6 @@ function App() {
       setFeedback("");
       updateEvent(activeEvent, eventToValidate);
     }
-    //if CREATE, validate if event conflicts with others. If yes, transition to EDIT (of that conflicting event)
-    // "The event you are trying to create conflicts with this task." on a loop until there are no conflicting tasks
-    //if EDIT, validate if event conflicts with others. If yes, transition to DELETE (option to delete conflicting event or go back)
-
-
     return true;
   }
 
